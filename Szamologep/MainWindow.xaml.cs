@@ -143,6 +143,12 @@ namespace Szamologep
                         tb_kijelzo.Text = "Hiba";
                         return;
                     }
+                    if (szam1 % szam2 != 0)
+                    {
+                        float eredmeny = (float)szam1 / szam2;
+                        tb_kijelzo.Text = eredmeny.ToString();
+                        return;
+                    }
                     vegeredmeny = szam1 / szam2;
                     tb_kijelzo.Text = vegeredmeny.ToString();
                 }

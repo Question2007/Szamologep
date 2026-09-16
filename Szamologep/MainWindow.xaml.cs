@@ -73,14 +73,80 @@ namespace Szamologep
             }
         }
 
-
+        private int vegeredmeny = 0;
         private void Buttom_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             string felirat = button.Content.ToString();
 
-            
-            tb_kijelzo.Text = felirat;
+            if (tb_kijelzo.Text == "0")
+            {
+                tb_kijelzo.Text = felirat;
+
+            }
+            else if (felirat == "C")
+            {
+                tb_kijelzo.Text = "0";
+            }
+            else if (char.IsDigit(felirat[0])) {
+                tb_kijelzo.Text += felirat;
+            }
+            else if (felirat == "+")
+            {
+                tb_kijelzo.Text += "+";
+            }
+            else if (felirat == "-")
+            {
+                tb_kijelzo.Text += "-";
+            }
+            else if (felirat == "*")
+            {
+                tb_kijelzo.Text += "*";
+            }
+            else if (felirat == "/")
+            {
+                tb_kijelzo.Text += "/";
+            }
+            else if (felirat == "=")
+            {
+                if (tb_kijelzo.Text.Contains("+"))
+                {
+                    string[] szamok = tb_kijelzo.Text.Split("+");
+                    int szam1 = int.Parse(szamok[0]);
+                    int szam2 = int.Parse(szamok[1]);
+                    vegeredmeny = szam1 + szam2;
+                    tb_kijelzo.Text = vegeredmeny.ToString();
+                }
+                else if (tb_kijelzo.Text.Contains("-"))
+                {
+                    string[] szamok = tb_kijelzo.Text.Split("-");
+                    int szam1 = int.Parse(szamok[0]);
+                    int szam2 = int.Parse(szamok[1]);
+                    vegeredmeny = szam1 - szam2;
+                    tb_kijelzo.Text = vegeredmeny.ToString();
+                }
+                else if (tb_kijelzo.Text.Contains("*"))
+                {
+                    string[] szamok = tb_kijelzo.Text.Split("*");
+                    int szam1 = int.Parse(szamok[0]);
+                    int szam2 = int.Parse(szamok[1]);
+                    vegeredmeny = szam1 * szam2;
+                    tb_kijelzo.Text = vegeredmeny.ToString();
+                }
+                if (tb_kijelzo.Text.Contains("/"))
+                {
+                    string[] szamok = tb_kijelzo.Text.Split("/");
+                    int szam1 = int.Parse(szamok[0]);
+                    int szam2 = int.Parse(szamok[1]);
+                    if (szam1 == 0 || szam2 == 0)
+                    {
+                        tb_kijelzo.Text = "Hiba";
+                        return;
+                    }
+                    vegeredmeny = szam1 / szam2;
+                    tb_kijelzo.Text = vegeredmeny.ToString();
+                }
+            }
         }
     }
 }
